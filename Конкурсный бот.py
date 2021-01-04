@@ -1,5 +1,9 @@
-h = '''Конкурсный самописный бот, ver. 2.0
+h = '''Конкурсный самописный бот, ver. 2.1
 Список команд: "help"'''
+
+# Бот для проведения конкурсов и розыгрышей с генератором случайных чисел
+# Вы можете добавлять участников в базу данных, удалять их и вести их учёт
+# Работает при помощи базы данных SQLite
 
 import sqlite3
 import random
@@ -26,8 +30,8 @@ def console():
         console()
 
 def addmember():
-    id = input('Введите ID участника: ')
-    nickname = input('Введите игровой ник участника: ')
+    id = input('Введите ID участника: ') # Можете просто вводить любые числа или буквы, а потом посмотреть их через команду "list"
+    nickname = input('Введите никнейм участника: ')
     cursor.execute(f"INSERT INTO members (id, nick) VALUES ('{id}', '{nickname}')")
     connection.commit()
     console()
@@ -43,7 +47,7 @@ def list():
 
 def delete():
     user = input('Введите ID пользователя (#all удалит всех): ')
-    if cursor.execute(f"SELECT id FROM members WHERE id == '{user}'") is None:
+    if cursor.execute(f"SELECT id FROM members WHERE id == '{user}'").fetchone() is None:
         print('Пользователя нет в списке')
     elif user == '#all':
         cursor.execute('DELETE FROM members')
@@ -55,7 +59,7 @@ def delete():
     console()
 
 def help():
-    print(' list - список участников конкурса \n delete - удалить участника из конкурса \n add - добавить участника в конкурс \n finish - закончить набор участников и подвести итоги конкурса ')
+    print('\n list - список участников конкурса \n delete - удалить участника из конкурса \n add - добавить участника в конкурс \n finish - закончить набор участников и подвести итоги конкурса \n')
     console()
 
 def finish():
