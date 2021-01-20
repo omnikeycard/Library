@@ -7,7 +7,7 @@ from vk_api.longpoll import VkLongPoll, VkEventType
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 import asyncio
 
-token = "2e2f1140d1cc3fb1df44777beeac30f90153098aa60cc77f5ba76ec6b51016a834b0dca41f6bdf229a996"
+token = "###"
 vk_session = vk_api.VkApi(token=token)
 longpoll = VkBotLongPoll(vk_session, '198815123')
 vk = vk_session.get_api()
